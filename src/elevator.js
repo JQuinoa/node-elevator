@@ -1,4 +1,4 @@
-const ElevatorStatus  = require('./constants');
+const ElevatorStatus  = require('./elevator-status');
 const ElevatorEmitter = require('./elevator-emitter');
 
 class Elevator {
@@ -19,9 +19,12 @@ class Elevator {
 
   _moveHandler(floorNumber){
     this.emitter.emit("inTransit", floorNumber);
-    for (let i = 0; i < 10000000; i+= 0.5){}
+    // for (let i = 0; i < 10000000; i+= 0.5){}
     this.emitter.emit("eleBoarding", floorNumber);
-    for (let i = 0; i < 10000000; i+= 0.5){}
+    this.currentFloor = floorNumber;
+    this.emitter.emit("tripComplete", floorNumber);
+    this.emitter.emit("currentFloorChanged", this.currentFloor);
+    // for (let i = 0; i < 10000000; i+= 0.5){}
     this.emitter.emit("eleIdle", floorNumber);
   }
 }

@@ -10,9 +10,10 @@ const logger          = new ElevatorRequestLogger(myEmitter)
 
 myEmitter.emit('elevatorRequested', 1);
 myEmitter.emit('elevatorRequested', 2);
+myEmitter.emit('elevatorRequested', 2);
+myEmitter.emit('elevatorRequested', 2);
+myEmitter.emit('elevatorRequested', 2);
+
 myEmitter.emit('elevatorRequested', 3);
 myEmitter.emit('elevatorRequested', 4);
 myEmitter.emit('elevatorRequested', 5);
-myEmitter.emit('elevatorRequested', 6);
-myEmitter.emit('elevatorRequested', 3);
-myEmitter.emit('elevatorRequested', 1);
