@@ -8,12 +8,25 @@ const ele             = new Elevator({ emitter: myEmitter });
 const requestHandler  = new ElevatorRequestHandler({ elevator: ele, emitter: myEmitter });
 const logger          = new ElevatorRequestLogger(myEmitter)
 
-myEmitter.emit('elevatorRequested', 1);
-myEmitter.emit('elevatorRequested', 2);
-myEmitter.emit('elevatorRequested', 2);
-myEmitter.emit('elevatorRequested', 2);
+setTimeout(_=> {
+  myEmitter.emit('elevatorRequested', 1);
+}, 100)
+
 myEmitter.emit('elevatorRequested', 2);
 
-myEmitter.emit('elevatorRequested', 3);
-myEmitter.emit('elevatorRequested', 4);
-myEmitter.emit('elevatorRequested', 5);
+setTimeout(_=>{
+  myEmitter.emit('elevatorRequested', 2);
+  myEmitter.emit('elevatorRequested', 2);
+}, 700)
+
+setTimeout(_=>{
+  myEmitter.emit('elevatorRequested', 3);
+}, 600)
+
+setTimeout(_=>{
+  myEmitter.emit('elevatorRequested', 4);
+}, 500)
+
+setTimeout(_=>{
+  myEmitter.emit('elevatorRequested', 5);
+}, 300)
