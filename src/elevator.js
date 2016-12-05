@@ -4,10 +4,11 @@
 class Elevator {
   constructor(emitter) {
     // this.emitter      = emitter;
-    this.maxFloor     = 15;
-    this.currentFloor = 0;
-    this.onBoard      = [];
-    this.requests     = [];
+    this.maxFloor           = 15;
+    this.currentFloor       = 0;
+    this.onBoard            = [];
+    this.requests           = [];
+    this.requestBeingServed = false;
     // this.emitter.addListener("elevatorMove", (floorNumber) => this._moveHandler(floorNumber));
     this._start();
   }
@@ -19,21 +20,24 @@ class Elevator {
   }
 
   _start() {
-    console.log('Elevator Started');
-    while(this.requests.length > 0) {
-      let request = this.requests.shift();
-      while (this.currentFloor < request.person.floor) { this._floorUp()   }
-      while (this.currentFloor > request.person.floor) { this._floorDown() }
+    let requestInterval = setInterval(()=> {
+      if (this.requests.length > 0 && !this.requestBeingServed){
+        this.requestBeingServed = true;
+        let request = this.requests.shift();
+        while (this.currentFloor < request.person.floor) { this._floorUp()   }
+        while (this.currentFloor > request.person.floor) { this._floorDown() }
 
-      request.person.notify('elevator is here!')
-      this.onBoard.push(request.person);
+        request.person.notify('elevator is here!')
+        this.onBoard.push(request.person);
 
-      while (this.currentFloor < request.floor) { this._floorUp()   }
-      while (this.currentFloor > request.floor) { this._floorDown() }
+        while (this.currentFloor < request.floor) { this._floorUp()   }
+        while (this.currentFloor > request.floor) { this._floorDown() }
 
-      request.person.notify('elevator ride finished !');
-      this.onBoard = [];
-    }
+        request.person.notify('elevator ride finished !');
+        this.requestBeingServed = false;
+        this.onBoard = [];
+      }
+    }, 1000);
   }
 
   _floorUp(){
