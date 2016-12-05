@@ -19,10 +19,10 @@ class ElevatorRequestHandler {
 
     emitter.addListener('elevatorRequested', (floorNumber) => this._addToRequestQueue(floorNumber));
     emitter.addListener('addedToQueue',      (floorNumber) => this._attemptMove(floorNumber));
-    emitter.addListener('inTransit',          _ => this._inTransit());
-    emitter.addListener('eleBoarding',        _ => this._eleBoarding());
     emitter.addListener('eleIdle',           (floorNumber) => this._eleIdle(floorNumber));
     emitter.addListener('tripComplete',      (floorNumber) => this._onTripComplete(floorNumber));
+    emitter.addListener('inTransit',          _ => this._inTransit());
+    emitter.addListener('eleBoarding',        _ => this._eleBoarding());
   }
 
   _addToRequestQueue(floorNumber){
