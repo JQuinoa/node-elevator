@@ -1,18 +1,11 @@
 class Person {
-  constructor({
-      name        = "Ironhacker",
-      floorNumber = 0,
-      emitter     = new ElevatorEmitter()
-      destinationFloor,
-    })
-    {
-      this.name             = name;
-      this.floorNumber      = floorNumber;
-      this.emitter          = emitter;
-      this.destinationFloor = destinationFloor;
-    }
-
-  _request(){
-    
+  constructor(name = "Ironhacker", floor = 0) {
+      this.name  = name;
+      this.floor = floor;
+  }
+  notify(msg) {
+    console.log(`${this.name} | ${msg}`)
   }
 }
+
+module.exports = Person;
